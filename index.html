@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>SimpleDir — Documentation</title>
+
+<style>
+:root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --text: #242424;
+    --muted: #686868;
+    --border: #dedede;
+    --hover: #f6f6f6;
+    --accent: #2457a7;
+    --code-bg: #f8f8f8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    color: inherit;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+header {
+    position: relative;
+    padding: 58px 24px 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-right: 45px;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.25;
+}
+
+h1 {
+    margin: 0 0 12px;
+    font-size: clamp(36px, 6vw, 49px);
+}
+
+header p {
+    max-width: 610px;
+    margin: 0;
+    color: var(--muted);
+}
+
+h2 {
+    margin: 0 0 16px;
+    font-size: 29px;
+}
+
+h3 {
+    margin: 26px 0 8px;
+    font-size: 20px;
+}
+
+p {
+    margin: 10px 0 16px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+a.button {
+    display: inline-block;
+    padding: 7px 11px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 120ms ease;
+}
+
+a.button:hover {
+    background: var(--hover);
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8px 24px 30px;
+}
+
+section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 20px;
+}
+
+section > p:first-of-type {
+    margin-top: 0;
+}
+
+h2 + p {
+    margin-top: 0;
+}
+
+ol,
+ul {
+    padding-left: 24px;
+}
+
+li {
+    margin: 7px 0;
+}
+
+strong {
+    font-weight: 650;
+}
+
+code {
+    padding: 2px 4px;
+    border-radius: 3px;
+    background: var(--code-bg);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 0.88em;
+    overflow-wrap: anywhere;
+}
+
+pre {
+    position: relative;
+    overflow-x: auto;
+    margin: 16px 0;
+    padding: 43px 16px 16px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--code-bg);
+    line-height: 1.65;
+    tab-size: 4;
+}
+
+pre code {
+    padding: 0;
+    background: transparent;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    overflow-wrap: normal;
+    white-space: pre;
+}
+
+.copy-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 9px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: white;
+    color: var(--text);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.copy-button:hover {
+    background: var(--hover);
+}
+
+.note {
+    margin: 18px 0;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-left: 3px solid #777;
+    color: #383838;
+    font-size: 14px;
+}
+
+.note p:last-child {
+    margin-bottom: 0;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.github-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.github-corner a {
+    display: block;
+    width: 80px;
+    height: 80px;
+    background: #24292f;
+    color: #ffffff;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    transition: background 120ms ease;
+}
+
+.github-corner a:hover {
+    background: #444c56;
+}
+
+.github-corner svg {
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    width: 29px;
+    height: 29px;
+    fill: #ffffff;
+}
+
+footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 25px 24px 40px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+footer p {
+    margin: 4px 0;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 45px 18px 25px;
+    }
+
+    .header-inner {
+        padding-right: 20px;
+    }
+
+    main {
+        padding: 0 18px 25px;
+    }
+
+    section {
+        padding: 27px 0;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    .github-corner {
+        width: 65px;
+        height: 65px;
+    }
+
+    .github-corner a {
+        width: 65px;
+        height: 65px;
+    }
+
+    .github-corner svg {
+        top: 7px;
+        right: 7px;
+        width: 25px;
+        height: 25px;
+    }
+
+    pre code {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- GitHub Octocat corner -->
+<div class="github-corner">
+    <a
+        href="https://github.com/danieltorres-mhcs/SimpleDir-library"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open SimpleDir on GitHub"
+        title="Fork me on GitHub"
+    >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.05c-3.1.67-3.75-1.32-3.75-1.32-.5-1.29-1.23-1.63-1.23-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.27-2.61 5.21-5.09 5.49.4.35.75 1.02.75 2.06V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z"/>
+        </svg>
+    </a>
+</div>
+
+<header>
+    <div class="header-inner">
+        <h1>SimpleDir</h1>
+        <p>
+            Make archives and directory sites for free and easily.
+        </p>
+
+        <nav>
+            <a class="button"
+               href="https://github.com/danieltorres-mhcs/SimpleDir-library"
+               target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
+            <a class="button" href="#getting-started">Getting started</a>
+            <a class="button" href="#github-pages">GitHub Pages</a>
+            <a class="button" href="#vercel">Vercel</a>
+            <a class="button" href="#custom-domain">Free subdomains</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<section id="introduction">
+    <h2>Welcome</h2>
+
+    <p>
+        SimpleDir lets you create a directory-style website without
+        writing an entire website from scratch. Add text, image slideshows,
+        folders, and dividers to organize your content. I tried making this as stupidly simple as possible.
+    </p>
+
+    <p>
+        Use it for a personal page, a collection of links, a project index,
+        a resource directory, or an archive.
+    </p>
+
+    <div class="note">
+        <strong>The basic idea:</strong> The HTML template already handles
+        the layout. You provide the entries in <code>libraryData</code>
+        and leave the surrounding template code intact.
+    </div>
+</section>
+
+<section id="getting-started">
+    <h2>Getting started</h2>
+
+    <ol>
+        <li>Open the SimpleDir repository on GitHub.</li>
+        <li>Open the template HTML file.</li>
+        <li>Scroll until you find the wall of red ❌ boundary comments.</li>
+        <li>Write or paste your entries inside the <code>libraryData</code> object.</li>
+        <li>Save your finished copy as <code>index.html</code>.</li>
+        <li>Publish it with GitHub Pages or Vercel.</li>
+    </ol>
+
+    <div class="note">
+        Keep <code>const libraryData = {</code>, its closing
+        <code>};</code>, and the boundary comments. Only replace or add
+        the directory entries in the designated area.
+    </div>
+</section>
+
+<section id="text-page">
+    <h2>Text page</h2>
+
+    <p>Create an entry that displays text.</p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "About Me",
+    type: "text",
+    content: "Hello! Welcome to my website."
+},</code></pre>
+
+    <p>Change the title and content to your own.</p>
+</section>
+
+<section id="image-page">
+    <h2>Image page</h2>
+
+    <p>
+        The slideshow type can display an image. A single-slide slideshow
+        can be used when you want one image in an entry.
+    </p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "My Image",
+    type: "slideshow",
+    slides: [
+        {
+            image: "https://example.com/image.jpg"
+        }
+    ]
+},</code></pre>
+
+    <p>Replace the example URL with a URL to your image.</p>
+</section>
+
+<section id="text-slideshow">
+    <h2>Text slideshow</h2>
+
+    <p>Use multiple slides to show messages one at a time.</p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "My Messages",
+    type: "slideshow",
+    slides: [
+        { text: "Welcome!" },
+        { text: "Thanks for visiting." },
+        { text: "Have a great day!" }
+    ]
+},</code></pre>
+</section>
+
+<section id="image-slideshow">
+    <h2>Image slideshow</h2>
+
+    <p>Use multiple images in a single slideshow.</p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "My Photos",
+    type: "slideshow",
+    slides: [
+        { image: "https://example.com/photo1.jpg" },
+        { image: "https://example.com/photo2.jpg" },
+        { image: "https://example.com/photo3.jpg" }
+    ]
+},</code></pre>
+</section>
+
+<section id="mixed-slideshow">
+    <h2>Mixed slideshow</h2>
+
+    <p>
+        A slide can contain text, an image, or both. This lets you combine
+        captions and pictures in the same slideshow.
+    </p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "My Collection",
+    type: "slideshow",
+    slides: [
+        {
+            text: "This is my first slide."
+        },
+        {
+            image: "https://example.com/photo.jpg",
+            text: "A photo with a caption."
+        }
+    ]
+},</code></pre>
+</section>
+
+<section id="folder">
+    <h2>Folder</h2>
+
+    <p>A folder groups other entries inside it.</p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "My Folder",
+    type: "folder",
+    items: [
+        {
+            title: "First Page",
+            type: "text",
+            content: "This is inside the folder."
+        },
+        {
+            title: "Second Page",
+            type: "text",
+            content: "This is another page."
+        }
+    ]
+},</code></pre>
+</section>
+
+<section id="nested-folder">
+    <h2>Nested folder</h2>
+
+    <p>Folders can contain other folders.</p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    title: "Main Folder",
+    type: "folder",
+    items: [
+        {
+            title: "Subfolder",
+            type: "folder",
+            items: [
+                {
+                    title: "Inside the Subfolder",
+                    type: "text",
+                    content: "You found the nested page!"
+                }
+            ]
+        }
+    ]
+},</code></pre>
+</section>
+
+<section id="dividers">
+    <h2>Dividers</h2>
+
+    <p>
+        A divider is an entry in <code>libraryData</code>, rather than
+        simply a line of HTML added outside the directory data.
+        The template may use its <code>content</code> field when displaying
+        the divider.
+    </p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>{
+    type: "divider",
+    content: "My section divider"
+},</code></pre>
+
+    <div class="note">
+        Keep the divider's <code>content</code> field if it is present
+        in your template's examples. Its precise display behavior depends
+        on the template's rendering code.
+    </div>
+</section>
+
+<section id="github-pages">
+    <h2>Publish with GitHub Pages</h2>
+
+    <p>
+        GitHub Pages can host a static HTML website for free.
+    </p>
+
+    <h3>Step 1: Open the SimpleDir template</h3>
+
+    <p>
+        Visit the
+        <a href="https://github.com/danieltorres-mhcs/SimpleDir-library"
+           target="_blank" rel="noopener noreferrer">SimpleDir repository</a>
+        and open the HTML template file you want to use.
+    </p>
+
+    <p>
+        If your template is named <code>blankpage.html</code>, you can try
+        the direct link below. It assumes the file is in the root of the
+        repository's <code>main</code> branch.
+    </p>
+
+    <p>
+        <a href="https://github.com/danieltorres-mhcs/SimpleDir-library/blob/main/blankpage.html"
+           target="_blank" rel="noopener noreferrer">Open blankpage.html ↗</a>
+    </p>
+
+    <h3>Step 2: Find the red ❌ boundaries</h3>
+
+    <p>
+        Scroll through the file until you find the wall of red ❌ comments.
+        They mark the part of the template intended for your code.
+    </p>
+
+    <pre><button class="copy-button" onclick="copyCode(this)">Copy</button><code>/* ❌❌❌ DO NOT EDIT ABOVE HERE!! ❌❌❌ */
+
+const libraryData = {
+    /* YOUR CODE GOES HERE ALSO DO NOT REMOVE
+       CONST LIBRARY DATA OR THE }; */
+};
+
+/* ❌❌❌ DO NOT EDIT BELOW HERE!! ❌❌❌ */</code></pre>
+
+    <div class="note">
+        Do not delete the <code>const libraryData = {</code> line,
+        the closing <code>};</code>, or the boundary comments. Put your
+        entries inside the braces.
+    </div>
+
+    <h3>Step 3: Add your entries</h3>
+
+    <p>
+        Copy an example from this documentation and place it inside
+        <code>libraryData</code>. When adding several entries, separate
+        them with commas as required by JavaScript.
+    </p>
+
+    <h3>Step 4: Save as index.html</h3>
+
+    <p>
+        Save your finished file as <code>index.html</code>. This is the
+        standard entry filename for a basic static website.
+    </p>
+
+    <h3>Step 5: Create a repository</h3>
+
+    <ol>
+        <li>Sign in to GitHub.</li>
+        <li>Create a new repository for your website.</li>
+        <li>Upload <code>index.html</code> to the repository's root folder.</li>
+        <li>Commit the file.</li>
+    </ol>
+
+    <h3>Step 6: Enable GitHub Pages</h3>
+
+    <ol>
+        <li>Open your website repository.</li>
+        <li>Go to <strong>Settings</strong>.</li>
+        <li>Choose <strong>Pages</strong> in the sidebar.</li>
+        <li>Under the build and deployment options, choose deployment from a branch if prompted.</li>
+        <li>Select the <code>main</code> branch and <code>/(root)</code>.</li>
+        <li>Click <strong>Save</strong>.</li>
+    </ol>
+
+    <h3>Step 7: Open your website</h3>
+
+    <p>
+        After GitHub Pages publishes the site, the Pages settings will
+        show the published address. Open it to check your website.
+    </p>
+
+    <div class="note">
+        If the website does not appear, check the filename, publishing
+        folder, and JavaScript syntax.
+    </div>
+</section>
+
+<section id="vercel">
+    <h2>Publish with Vercel</h2>
+
+    <p>
+        Vercel is another service that can host a static HTML website.
+        Importing a GitHub repository is usually the easiest workflow.
+    </p>
+
+    <h3>Option A: Import from GitHub</h3>
+
+    <ol>
+        <li>Save your website as <code>index.html</code>.</li>
+        <li>Upload the file to a GitHub repository and commit it.</li>
+        <li>Open <a href="https://vercel.com/"
+           target="_blank" rel="noopener noreferrer">Vercel</a>.</li>
+        <li>Choose the option to add a new project.</li>
+        <li>Import your GitHub repository.</li>
+        <li>Follow the project setup instructions.</li>
+        <li>Deploy and open the URL Vercel provides.</li>
+    </ol>
+
+    <h3>Option B: Use a supported deployment workflow</h3>
+
+    <ol>
+        <li>Make sure your file is named <code>index.html</code>.</li>
+        <li>Check Vercel's current deployment options and documentation.</li>
+        <li>Use a supported CLI or deployment workflow for the folder containing your HTML file.</li>
+        <li>Open the deployed URL.</li>
+    </ol>
+
+    <div class="note">
+        Vercel's dashboard options can change. Importing a GitHub repository
+        is a good starting point if you are new to deployment.
+    </div>
+</section>
+
+<section id="custom-domain">
+    <h2>Free custom domains and subdomains</h2>
+
+    <p>
+        You do not always need to pay for a domain to give your website
+        a memorable address. Some providers offer free subdomains that
+        you can connect to your published website.
+    </p>
+
+    <h3>Free subdomain examples</h3>
+
+    <ul>
+        <li>
+            <a href="https://devs.surf/"
+               target="_blank" rel="noopener noreferrer">Devs.Surf ↗</a>
+            — depending on availability and provider rules, an address
+            could look like <code>yourname.devs.surf</code>.
+        </li>
+        <li>
+            <a href="https://lgbt.sh/"
+               target="_blank" rel="noopener noreferrer">LGBT.SH ↗</a>
+            — depending on availability and provider rules, an address
+            could look like <code>yourname.lgbt.sh</code>.
+        </li>
+    </ul>
+
+    <div class="note">
+        A subdomain such as <code>yourname.devs.surf</code> is provided
+        under the parent domain <code>devs.surf</code>. You do not own
+        the parent domain, and your continued use depends on the provider's
+        terms and policies.
+    </div>
+
+    <h3>Step 1: Publish your website</h3>
+
+    <p>
+        Publish your SimpleDir site using GitHub Pages or Vercel first.
+        Check that the platform-provided website address works.
+    </p>
+
+    <h3>Step 2: Register a free subdomain</h3>
+
+    <p>
+        Visit a provider that offers free subdomains, check whether your
+        preferred name is available, and review its DNS options and terms.
+    </p>
+
+    <h3>Step 3: Add the domain to your hosting project</h3>
+
+    <p>
+        Open the custom-domain settings for your GitHub Pages or Vercel
+        project and enter the subdomain you registered.
+    </p>
+
+    <h3>Step 4: Configure DNS</h3>
+
+    <p>
+        In the subdomain provider's DNS settings, add the records requested
+        by your hosting service. The exact records depend on your hosting
+        provider and domain configuration.
+    </p>
+
+    <h3>Step 5: Verify and test</h3>
+
+    <p>
+        Wait for the DNS changes to take effect, complete any domain
+        verification steps, and test the new address. Enable HTTPS if
+        your hosting provider offers it for the domain.
+    </p>
+
+    <div class="note">
+        Free subdomain availability, renewal rules, DNS features, and
+        permitted uses can change. Check the provider's current rules
+        before relying on a free subdomain for a long-term project.
+    </div>
+
+    <h3>Do I need to buy a domain?</h3>
+
+    <p>
+        No. You can use the free address provided by GitHub Pages or Vercel,
+        or connect a free subdomain if its provider supports your hosting
+        setup. Buying your own domain is optional.
+    </p>
+</section>
+
+<section id="important-notes">
+    <h2>Important notes</h2>
+
+    <ul>
+        <li>Use <code>index.html</code> as the entry filename for a basic static website.</li>
+        <li>Keep the <code>libraryData</code> declaration and its closing braces intact.</li>
+        <li>Separate entries with commas wherever JavaScript syntax requires them.</li>
+        <li>Use valid image URLs for slideshow images.</li>
+        <li><code>BASE64:</code> is only for making the ai po po not snipe controversial info.</li>
+        <li>Never put passwords, private keys, or sensitive information in public website source code.</li>
+        <li>Refer to the actual template when you need to confirm the exact behavior of a field.</li>
+    </ul>
+</section>
+
+</main>
+
+<footer>
+    <p>SimpleDir documentation</p>
+    <p>
+        <a href="https://github.com/danieltorres-mhcs/SimpleDir-library"
+           target="_blank" rel="noopener noreferrer">View the GitHub repository ↗</a>
+    </p>
+</footer>
+
+<script>
+async function copyCode(button) {
+    const code = button.parentElement.querySelector("code").innerText;
+
+    try {
+        await navigator.clipboard.writeText(code);
+    } catch (error) {
+        const textarea = document.createElement("textarea");
+        textarea.value = code;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand("copy");
+        } finally {
+            textarea.remove();
+        }
+    }
+
+    const originalText = button.textContent;
+    button.textContent = "Copied!";
+
+    setTimeout(() => {
+        button.textContent = originalText;
+    }, 1400);
+}
+</script>
+
+</body>
+</html>
